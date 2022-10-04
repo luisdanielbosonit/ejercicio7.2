@@ -15,7 +15,7 @@ public class CustomError {
     public CustomError(String message, HttpStatus httpStatus) {
         this.message= message;
         this.httpStatus= httpStatus;
-        this.timestamp= timestamp;
+        this.timestamp= new Date();
     }
 
 

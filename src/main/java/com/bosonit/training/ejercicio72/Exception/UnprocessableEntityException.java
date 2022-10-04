@@ -10,6 +10,8 @@ public class UnprocessableEntityException extends RuntimeException {
 
     public UnprocessableEntityException(String message, HttpStatus httpStatus, Date timeStamp) {
         super(message);
+        this.httpStatus=httpStatus;
+        this.timeStamp=timeStamp;
 
 
     }

@@ -10,6 +10,8 @@ public class EntityNotFoundException extends RuntimeException{
 
     public EntityNotFoundException(String message, HttpStatus httpStatus, Date timeStamp ){
         super(message);
+        this.httpStatus=httpStatus;
+        this.timeStamp=timeStamp;
 
 
     }
