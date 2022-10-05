@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persona")
+//@RequestMapping("/persona")
+@CrossOrigin
 public class PersonaController {
 
     @Autowired
     ServicePersona servicepersona;
 
 
-    @PostMapping("/post")
+    @PostMapping("/addperson")
     public PersonaOUTputDto guardarpersona(@RequestBody PersonaINputDto personaINputDto) throws Exception {
         return servicepersona.loadpersona(personaINputDto);
     }
@@ -43,7 +44,7 @@ public class PersonaController {
         servicepersona.delete(id);
         }
 
-    @GetMapping("/todos")
+    @GetMapping("/getall")
     public List<PersonaOUTputDto> viewall(){
         return (List<PersonaOUTputDto>) servicepersona.viewall();
     }
