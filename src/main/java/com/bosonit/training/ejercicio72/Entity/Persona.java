@@ -37,11 +37,14 @@ public class Persona  {
     private String city;
     @Column(nullable = false)
     private boolean active;
-    @Column(nullable = false)
+
+    @Temporal(TemporalType.DATE)
     private Date created_date;
+
     @Column(nullable = false)
     private String imagen_url;
-    @Column(nullable = false)
+
+    @Temporal(TemporalType.DATE)
     private Date termination_date;
 
 

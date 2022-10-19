@@ -7,7 +7,12 @@ import com.bosonit.training.ejercicio72.Exception.EntityNotFoundException;
 import com.bosonit.training.ejercicio72.Exception.UnprocessableEntityException;
 import com.bosonit.training.ejercicio72.Repository.PersonaDao;
 import com.bosonit.training.ejercicio72.Service.service.ServicePersona;
+import com.bosonit.training.ejercicio72.criteriaBuilder.PersonaCriterialRepository;
+import com.bosonit.training.ejercicio72.criteriaBuilder.PersonaPage;
+import com.bosonit.training.ejercicio72.criteriaBuilder.PersonaSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,9 @@ public class ServiceImplPersona implements ServicePersona {
 
     @Autowired
     private PersonaDao personaDao;
+
+    @Autowired
+    PersonaCriterialRepository personaCriterialRepository;
 
 
     @Override
@@ -116,6 +124,15 @@ public class ServiceImplPersona implements ServicePersona {
         Persona persona= personaINputDto.transformIntoPersona();
         personaDao.save(persona);
         return new PersonaOUTputDto(persona);
+    }
+
+    @Override
+    public Page<PersonaOUTputDto> personaCriterial(PersonaPage personaPage, PersonaSearchCriteria personaSearchCriteria) {
+
+        Page<Persona> personPage = personaCriterialRepository.findAllWiithFilters(personaPage,personaSearchCriteria);
+        List<PersonaOUTputDto> personOutputDtoList = personPage.getContent().stream().map(PersonaOUTputDto::new).toList();
+
+        return new PageImpl<>(personOutputDtoList, personPage.getPageable(), personPage.getTotalElements());
     }
 
 }
