@@ -112,10 +112,7 @@ public class ServiceImplPersona implements ServicePersona {
     @Override
     public List<PersonaOUTputDto> viewall() {
         List<PersonaOUTputDto> listaperson=new ArrayList<>();
-        personaDao.findAll().forEach(person -> {
-            PersonaOUTputDto personOutputDto = new PersonaOUTputDto(person);
-            listaperson.add(personOutputDto);
-        });
+        personaDao.findAll().stream().map(PersonaOUTputDto::new).forEach(personOutputDto -> listaperson.add(personOutputDto));
         return listaperson;
     }
 
